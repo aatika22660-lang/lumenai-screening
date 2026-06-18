@@ -8,17 +8,17 @@ We are building a smartphone-based oral cancer early detection system designed f
 
 The system has two components that work together: a Flutter Android application and a low-cost hardware attachment for fluorescence imaging. Together they form a triage tool that allows non-specialist users, either trained Community Health Workers or concerned individuals, to capture images of oral tissue, receive an AI-powered risk assessment, and act on it before a lesion becomes advanced.
 
-The clinical foundation is autofluorescence. Healthy oral mucosa absorbs 405nm blue-violet light and re-emits it as a pale green glow. Dysplastic or cancerous tissue loses this autofluorescence capacity and appears dark against the green background, a phenomenon called Fluorescence Visualisation Loss (FVL). This is the same principle used in professional devices like the VELscope, which costs thousands of dollars. Your prototype replicates the core imaging principle for under $50.
+The clinical foundation is autofluorescence. Healthy oral mucosa absorbs 405nm blue-violet light and re-emits it as a pale green glow. Dysplastic or cancerous tissue loses this autofluorescence capacity and appears dark against the green background, a phenomenon called Fluorescence Visualisation Loss (FVL). This is the same principle used in professional devices like the VELscope, which costs thousands of dollars. Our prototype replicates the core imaging principle for under $50.
 
 ---
 
 ## Why This Problem Matters
 
-Pakistan has one of the highest rates of oral cancer in the world. In Karachi's industrial areas, the majority of male workers use smokeless tobacco daily — Gutka, Paan, Naswar. These substances are held in the gingivobuccal sulcus for extended periods, delivering carcinogens directly to the mucosal lining. The anatomical sites most affected — lateral borders of the tongue, floor of mouth, buccal mucosa — are the exact sites your app targets.
+Pakistan has one of the highest rates of oral cancer in the world. In Karachi's industrial areas, the majority of male workers use smokeless tobacco daily — Gutka, Paan, Naswar. These substances are held in the gingivobuccal sulcus for extended periods, delivering carcinogens directly to the mucosal lining. The anatomical sites most affected, lateral borders of the tongue, floor of mouth, buccal mucosa, are the exact sites our app targets.
 
 The mortality gap is stark. Early-stage oral cancer has a survival rate above 80%. Late-stage drops below 30%. The reason outcomes are poor is not that treatment doesn't work — it is that screening doesn't reach the people who need it. These workers do not visit oncology units. They do not engage with formal healthcare unless symptoms are severe. By then it is often too late.
 
-Your tool attacks this gap directly.
+Our tool attacks this gap directly.
 
 ---
 
@@ -278,7 +278,7 @@ The referral PDF is not a demo feature. It is the mechanism by which a positive 
 
 ### Prototype Integrity
 
-The project is honest about what it is. Every screen carries "Prototype — Not for Clinical Use." The AI is a vision model, not a validated diagnostic algorithm. The hardware is a validation rig, not a polished medical device. This honesty is a strength, not a weakness. It demonstrates that you understand the difference between a proof of concept and a deployed product, which is exactly the maturity level Simvention rewards.
+The project is honest about what it is. Every screen carries "Prototype — Not for Clinical Use." The AI is a vision model, not a validated diagnostic algorithm. The hardware is a validation rig, not a polished medical device. This honesty is a strength, not a weakness. It demonstrates that we understand the difference between a proof of concept and a deployed product, which is exactly the maturity level Simvention rewards.
 
 ### The Progression Path
 
@@ -293,9 +293,9 @@ Each phase builds on the last. The software architecture already anticipates thi
 
 ---
 
-## What You've Actually Built
+## What We've Actually Built
 
-In the time since this project started you have:
+In the time since this project started we have:
 
 - Designed and built a complete Flutter application with two fully separate user modes
 - Created a patient data model, screening data model, and SQLite database with proper migrations
