@@ -69,116 +69,116 @@ extension OralLocationDetails on OralLocation {
     }
   }
 
-  _MouthRegion get mouthRegion {
+  MouthRegion get mouthRegion {
     switch (this) {
       case OralLocation.roofOfMouth:
-        return _MouthRegion.roof;
+        return MouthRegion.roof;
       case OralLocation.floorOfMouth:
-        return _MouthRegion.floor;
+        return MouthRegion.floor;
       case OralLocation.innerCheek:
-        return _MouthRegion.cheeks;
+        return MouthRegion.cheeks;
       case OralLocation.topOfTongue:
-        return _MouthRegion.tongueTop;
+        return MouthRegion.tongueTop;
       case OralLocation.sideOfTongue:
-        return _MouthRegion.tongueSides;
+        return MouthRegion.tongueSides;
       case OralLocation.undersideOfTongue:
-        return _MouthRegion.tongueUnder;
+        return MouthRegion.tongueUnder;
       case OralLocation.lips:
-        return _MouthRegion.lips;
+        return MouthRegion.lips;
       case OralLocation.gums:
-        return _MouthRegion.gums;
+        return MouthRegion.gums;
     }
   }
 
-  List<_ImageSlot> get imageSlots {
+  List<ImageSlot> get imageSlots {
     switch (this) {
       case OralLocation.topOfTongue:
         return [
-          _ImageSlot(label: 'White light · top of tongue', isBlueLight: false),
-          _ImageSlot(label: 'Fluorescence · top of tongue', isBlueLight: true),
+          ImageSlot(label: 'White light · top of tongue', isBlueLight: false),
+          ImageSlot(label: 'Fluorescence · top of tongue', isBlueLight: true),
         ];
       case OralLocation.undersideOfTongue:
         return [
-          _ImageSlot(
+          ImageSlot(
             label: 'White light · underside of tongue',
             isBlueLight: false,
           ),
-          _ImageSlot(
+          ImageSlot(
             label: 'Fluorescence · underside of tongue',
             isBlueLight: true,
           ),
         ];
       case OralLocation.floorOfMouth:
         return [
-          _ImageSlot(label: 'White light · floor of mouth', isBlueLight: false),
-          _ImageSlot(label: 'Fluorescence · floor of mouth', isBlueLight: true),
+          ImageSlot(label: 'White light · floor of mouth', isBlueLight: false),
+          ImageSlot(label: 'Fluorescence · floor of mouth', isBlueLight: true),
         ];
       case OralLocation.sideOfTongue:
         return [
-          _ImageSlot(
+          ImageSlot(
             label: 'White light · right side of tongue',
             isBlueLight: false,
           ),
-          _ImageSlot(
+          ImageSlot(
             label: 'White light · left side of tongue',
             isBlueLight: false,
           ),
-          _ImageSlot(
+          ImageSlot(
             label: 'Fluorescence · right side of tongue',
             isBlueLight: true,
           ),
-          _ImageSlot(
+          ImageSlot(
             label: 'Fluorescence · left side of tongue',
             isBlueLight: true,
           ),
         ];
       case OralLocation.roofOfMouth:
         return [
-          _ImageSlot(label: 'White light · Hard palate', isBlueLight: false),
-          _ImageSlot(label: 'White light · Soft palate', isBlueLight: false),
-          _ImageSlot(label: 'Fluorescence · Hard palate', isBlueLight: true),
-          _ImageSlot(label: 'Fluorescence · Soft palate', isBlueLight: true),
+          ImageSlot(label: 'White light · Hard palate', isBlueLight: false),
+          ImageSlot(label: 'White light · Soft palate', isBlueLight: false),
+          ImageSlot(label: 'Fluorescence · Hard palate', isBlueLight: true),
+          ImageSlot(label: 'Fluorescence · Soft palate', isBlueLight: true),
         ];
       case OralLocation.innerCheek:
         return [
-          _ImageSlot(label: 'White light · Right cheek', isBlueLight: false),
-          _ImageSlot(label: 'White light · Left cheek', isBlueLight: false),
-          _ImageSlot(label: 'Fluorescence · Right cheek', isBlueLight: true),
-          _ImageSlot(label: 'Fluorescence · Left cheek', isBlueLight: true),
+          ImageSlot(label: 'White light · Right cheek', isBlueLight: false),
+          ImageSlot(label: 'White light · Left cheek', isBlueLight: false),
+          ImageSlot(label: 'Fluorescence · Right cheek', isBlueLight: true),
+          ImageSlot(label: 'Fluorescence · Left cheek', isBlueLight: true),
         ];
       case OralLocation.lips:
         return [
-          _ImageSlot(label: 'White light · Upper lip', isBlueLight: false),
-          _ImageSlot(label: 'White light · Lower lip', isBlueLight: false),
-          _ImageSlot(label: 'Fluorescence · Upper lip', isBlueLight: true),
-          _ImageSlot(label: 'Fluorescence · Lower lip', isBlueLight: true),
+          ImageSlot(label: 'White light · Upper lip', isBlueLight: false),
+          ImageSlot(label: 'White light · Lower lip', isBlueLight: false),
+          ImageSlot(label: 'Fluorescence · Upper lip', isBlueLight: true),
+          ImageSlot(label: 'Fluorescence · Lower lip', isBlueLight: true),
         ];
       case OralLocation.gums:
         return [
-          _ImageSlot(label: 'White light · Upper gums', isBlueLight: false),
-          _ImageSlot(label: 'White light · Lower gums', isBlueLight: false),
-          _ImageSlot(label: 'Fluorescence · Upper gums', isBlueLight: true),
-          _ImageSlot(label: 'Fluorescence · Lower gums', isBlueLight: true),
+          ImageSlot(label: 'White light · Upper gums', isBlueLight: false),
+          ImageSlot(label: 'White light · Lower gums', isBlueLight: false),
+          ImageSlot(label: 'Fluorescence · Upper gums', isBlueLight: true),
+          ImageSlot(label: 'Fluorescence · Lower gums', isBlueLight: true),
         ];
     }
   }
 }
 
 // ── Image slot ────────────────────────────────────────────────────────────────
-class _ImageSlot {
+class ImageSlot {
   final String label;
   final bool isBlueLight;
-  const _ImageSlot({required this.label, required this.isBlueLight});
+  const ImageSlot({required this.label, required this.isBlueLight});
 }
 
 class _TaggedSlot {
-  final _ImageSlot slot;
+  final ImageSlot slot;
   final OralLocation location;
   const _TaggedSlot({required this.slot, required this.location});
 }
 
 // ── Mouth region enum ─────────────────────────────────────────────────────────
-enum _MouthRegion {
+enum MouthRegion {
   lips,
   gums,
   roof,
@@ -191,7 +191,7 @@ enum _MouthRegion {
 
 // ── Mini mouth silhouette icon ────────────────────────────────────────────────
 class _MouthIcon extends StatelessWidget {
-  final _MouthRegion region;
+  final MouthRegion region;
   final Color color;
   final bool isSelected;
 
@@ -218,7 +218,7 @@ class _MouthIcon extends StatelessWidget {
 }
 
 class _MouthIconPainter extends CustomPainter {
-  final _MouthRegion region;
+  final MouthRegion region;
   final Color color;
   final bool isSelected;
 
@@ -345,21 +345,21 @@ class _MouthIconPainter extends CustomPainter {
 
   Path _regionPath() {
     switch (region) {
-      case _MouthRegion.lips:
+      case MouthRegion.lips:
         return _lipsPath();
-      case _MouthRegion.roof:
+      case MouthRegion.roof:
         return _roofPath();
-      case _MouthRegion.floor:
+      case MouthRegion.floor:
         return _floorPath();
-      case _MouthRegion.cheeks:
+      case MouthRegion.cheeks:
         return _cheeksPath();
-      case _MouthRegion.tongueTop:
+      case MouthRegion.tongueTop:
         return _tongueTopPath();
-      case _MouthRegion.tongueSides:
+      case MouthRegion.tongueSides:
         return _tongueSidesPath();
-      case _MouthRegion.tongueUnder:
+      case MouthRegion.tongueUnder:
         return _tongueUnderPath();
-      case _MouthRegion.gums:
+      case MouthRegion.gums:
         return _gumsPath();
     }
   }
@@ -368,14 +368,14 @@ class _MouthIconPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final linePaint = Paint()
       ..color = isSelected
-          ? kPrimary.withOpacity(0.7)
-          : kPrimary.withOpacity(0.25)
+          ? kPrimary.withValues(alpha: 0.7)
+          : kPrimary.withValues(alpha: 0.25)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2
       ..strokeCap = StrokeCap.round;
 
     final fillPaint = Paint()
-      ..color = color.withOpacity(isSelected ? 0.9 : 0.7)
+      ..color = color.withValues(alpha: isSelected ? 0.9 : 0.7)
       ..style = PaintingStyle.fill;
 
     canvas.drawPath(_lipsPath(), linePaint);
@@ -383,8 +383,8 @@ class _MouthIconPainter extends CustomPainter {
       _openCavityPath(),
       Paint()
         ..color = isSelected
-            ? kPrimary.withOpacity(0.12)
-            : kPrimary.withOpacity(0.07)
+            ? kPrimary.withValues(alpha: 0.12)
+            : kPrimary.withValues(alpha: 0.07)
         ..style = PaintingStyle.fill,
     );
     canvas.drawPath(_openCavityPath(), linePaint);
@@ -460,9 +460,7 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen>
     super.dispose();
   }
 
-  _ImageSlot get _currentSlot => _taggedSlots[_currentStep].slot;
-  String get _currentLocationLabel => _taggedSlots[_currentStep].location.label;
-
+  ImageSlot get _currentSlot => _taggedSlots[_currentStep].slot;
   void _onToggleLocation(OralLocation loc) {
     setState(() {
       if (_selectedLocations.contains(loc)) {
@@ -498,82 +496,6 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen>
       _blueLightShown = false;
       _screenState = _ScreenState.capturing;
     });
-  }
-
-  // ── Image source sheet ────────────────────────────────────────────────────
-  void _showImageSourceSheet() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: kSurface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (_) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    color: kBorder,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              Text(
-                'Add image',
-                style: GoogleFonts.inter(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: kPrimary,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                _currentSlot.isBlueLight
-                    ? 'Fluorescence mode — blue light must be on'
-                    : 'White light — no attachment needed',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: _currentSlot.isBlueLight ? kBlueLight : kTextMuted,
-                  fontWeight: _currentSlot.isBlueLight
-                      ? FontWeight.w600
-                      : FontWeight.w400,
-                ),
-              ),
-              const SizedBox(height: 20),
-              _SourceTile(
-                icon: Icons.camera_alt_rounded,
-                label: 'Take photo',
-                sub: 'Open camera directly',
-                iconBg: kPrimary,
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickImage(ImageSource.camera);
-                },
-              ),
-              const SizedBox(height: 10),
-              _SourceTile(
-                icon: Icons.photo_library_rounded,
-                label: 'Upload from gallery',
-                sub: 'Choose an existing photo',
-                iconBg: kAccent,
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickImage(ImageSource.gallery);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   Future<void> _pickImage(ImageSource source) async {
@@ -774,7 +696,7 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen>
           child: ListView.separated(
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
             itemCount: locations.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 10),
+            separatorBuilder: (_, _) => const SizedBox(height: 10),
             itemBuilder: (context, i) {
               final loc = locations[i];
               final isSelected = _selectedLocations.contains(loc);
@@ -788,7 +710,7 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen>
                   ),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? loc.regionColor.withOpacity(0.07)
+                        ? loc.regionColor.withValues(alpha: 0.07)
                         : kSurface,
                     borderRadius: BorderRadius.circular(14),
                     border: Border.all(
@@ -962,7 +884,7 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen>
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
                             color: slot.isBlueLight
-                                ? kBlueLight.withOpacity(0.6)
+                                ? kBlueLight.withValues(alpha: 0.6)
                                 : kTextMuted,
                           ),
                         ),
@@ -1170,7 +1092,7 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen>
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: kPrimary.withOpacity(0.06),
+                      color: kPrimary.withValues(alpha: 0.06),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
@@ -1406,7 +1328,7 @@ class _BlueLightTransitionScreen extends StatelessWidget {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
-              color: kBlueLight.withOpacity(0.1),
+              color: kBlueLight.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: const Icon(
@@ -1484,7 +1406,7 @@ class _CheckRow extends StatelessWidget {
           width: 28,
           height: 28,
           decoration: BoxDecoration(
-            color: kAccent.withOpacity(0.12),
+            color: kAccent.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
           child: const Icon(Icons.check_rounded, size: 16, color: kAccent),
@@ -1532,8 +1454,8 @@ class _Viewfinder extends StatelessWidget {
           color: isPicked
               ? kAccent
               : isBlueLight
-              ? kBlueLight.withOpacity(0.6)
-              : kPrimary.withOpacity(0.3),
+              ? kBlueLight.withValues(alpha: 0.6)
+              : kPrimary.withValues(alpha: 0.3),
           width: 2,
         ),
       ),
@@ -1556,7 +1478,7 @@ class _Viewfinder extends StatelessWidget {
                         height: 80,
                         decoration: BoxDecoration(
                           color: (isBlueLight ? kBlueLight : Colors.white)
-                              .withOpacity(0.08),
+                              .withValues(alpha: 0.08),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -1565,8 +1487,8 @@ class _Viewfinder extends StatelessWidget {
                               : Icons.wb_sunny_rounded,
                           size: 40,
                           color: isBlueLight
-                              ? kBlueLight.withOpacity(0.7)
-                              : Colors.white.withOpacity(0.5),
+                              ? kBlueLight.withValues(alpha: 0.7)
+                              : Colors.white.withValues(alpha: 0.5),
                         ),
                       ),
                     ),
@@ -1574,7 +1496,7 @@ class _Viewfinder extends StatelessWidget {
                     Text(
                       'Use Camera or Gallery below',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         fontSize: 12,
                       ),
                     ),
@@ -1621,9 +1543,11 @@ class _Viewfinder extends StatelessWidget {
                     vertical: 5,
                   ),
                   decoration: BoxDecoration(
-                    color: kBlueLight.withOpacity(0.2),
+                    color: kBlueLight.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: kBlueLight.withOpacity(0.4)),
+                    border: Border.all(
+                      color: kBlueLight.withValues(alpha: 0.4),
+                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -1659,8 +1583,8 @@ class _Viewfinder extends StatelessWidget {
     final color = picked
         ? kAccent
         : blue
-        ? kBlueLight.withOpacity(0.7)
-        : Colors.white.withOpacity(0.4);
+        ? kBlueLight.withValues(alpha: 0.7)
+        : Colors.white.withValues(alpha: 0.4);
     const size = 20.0;
     const thickness = 2.5;
     const inset = 16.0;
@@ -1775,7 +1699,7 @@ class _PickedConfirmationBar extends StatelessWidget {
       width: double.infinity,
       height: 72,
       decoration: BoxDecoration(
-        color: kAccent.withOpacity(0.12),
+        color: kAccent.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: kAccent, width: 1.5),
       ),
@@ -1798,69 +1722,7 @@ class _PickedConfirmationBar extends StatelessWidget {
   }
 }
 
-// ── Source tile ───────────────────────────────────────────────────────────────
-class _SourceTile extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String sub;
-  final Color iconBg;
-  final VoidCallback onTap;
-
-  const _SourceTile({
-    required this.icon,
-    required this.label,
-    required this.sub,
-    required this.iconBg,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: BoxDecoration(
-          color: kBackground,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: kBorder),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                color: iconBg,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(icon, color: Colors.white, size: 22),
-            ),
-            const SizedBox(width: 14),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: kPrimary,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  sub,
-                  style: const TextStyle(fontSize: 12, color: kTextMuted),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+// SourceTile removed: unused declaration cleaned up.
 
 // ── Thumbnail card ────────────────────────────────────────────────────────────
 class _ThumbnailCard extends StatelessWidget {
@@ -1904,8 +1766,8 @@ class _ThumbnailCard extends StatelessWidget {
                             : Icons.wb_sunny_rounded,
                         size: 32,
                         color: isBlueLight
-                            ? kBlueLight.withOpacity(0.6)
-                            : Colors.white.withOpacity(0.3),
+                            ? kBlueLight.withValues(alpha: 0.6)
+                            : Colors.white.withValues(alpha: 0.3),
                       ),
                     ),
             ),

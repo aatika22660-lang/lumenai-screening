@@ -86,8 +86,9 @@ class _ResultsScreenState extends State<ResultsScreen> {
           location: widget.location,
         );
     final now = DateTime.now();
-    if (existing.any((s) => now.difference(s.screenedAt).inSeconds < 60))
+    if (existing.any((s) => now.difference(s.screenedAt).inSeconds < 60)) {
       return;
+    }
 
     final screening = Screening(
       id: IdGenerator.newScreeningId(),
@@ -225,9 +226,9 @@ class _ResultsScreenState extends State<ResultsScreen> {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Row(
         children: [
@@ -284,8 +285,9 @@ class _ResultsScreenState extends State<ResultsScreen> {
             )
             .toList();
 
-        if (areaFindings.isEmpty && areaImages.isEmpty)
+        if (areaFindings.isEmpty && areaImages.isEmpty) {
           return const SizedBox.shrink();
+        }
 
         return _buildAreaSection(
           areaLabel: area,
@@ -409,15 +411,15 @@ class _ResultsScreenState extends State<ResultsScreen> {
                       imageFile,
                       fit: BoxFit.cover,
                       width: double.infinity,
-                      errorBuilder: (_, __, ___) => Center(
+                      errorBuilder: (_, _, _) => Center(
                         child: Icon(
                           isBlue
                               ? Icons.fluorescent_rounded
                               : Icons.wb_sunny_rounded,
                           size: 32,
                           color: isBlue
-                              ? kBlueLight.withOpacity(0.5)
-                              : Colors.white.withOpacity(0.3),
+                              ? kBlueLight.withValues(alpha: 0.5)
+                              : Colors.white.withValues(alpha: 0.3),
                         ),
                       ),
                     ),
@@ -489,7 +491,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                       decoration: BoxDecoration(
                         color: isFluorescence
                             ? const Color(0xFF0D1B4B)
-                            : kAccent.withOpacity(0.1),
+                            : kAccent.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(
@@ -498,7 +500,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                             : Icons.wb_sunny_rounded,
                         size: 20,
                         color: isFluorescence
-                            ? kBlueLight.withOpacity(0.7)
+                            ? kBlueLight.withValues(alpha: 0.7)
                             : kAccent,
                       ),
                     ),
@@ -708,7 +710,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                               vertical: 5,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.18),
+                              color: Colors.white.withValues(alpha: 0.18),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
@@ -742,7 +744,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                           const SizedBox(height: 16),
                           Container(
                             height: 1,
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                           ),
                           const SizedBox(height: 16),
                           Text(
@@ -883,8 +885,8 @@ class _ResultsScreenState extends State<ResultsScreen> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: widget.symmetryAnalysis!.isSymmetrical
-                                    ? kAccent.withOpacity(0.1)
-                                    : kAmber.withOpacity(0.12),
+                                    ? kAccent.withValues(alpha: 0.1)
+                                    : kAmber.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(
@@ -1068,7 +1070,7 @@ class _BBoxPainter extends CustomPainter {
       canvas.drawRect(
         rect,
         Paint()
-          ..color = color.withOpacity(0.15)
+          ..color = color.withValues(alpha: 0.15)
           ..style = PaintingStyle.fill,
       );
 
@@ -1079,7 +1081,7 @@ class _BBoxPainter extends CustomPainter {
             color: color,
             fontSize: 9,
             fontWeight: FontWeight.w700,
-            background: Paint()..color = Colors.black.withOpacity(0.5),
+            background: Paint()..color = Colors.black.withValues(alpha: 0.5),
           ),
         ),
         textDirection: TextDirection.ltr,

@@ -43,16 +43,19 @@ class _ChwSetupScreenState extends State<ChwSetupScreen> {
     if (!_canContinue || _saving) return;
     setState(() => _saving = true);
 
+    final itemContext = context;
+
     await ChwPreferences.saveIdentifier(_nameController.text.trim());
 
-    if (!context.mounted) return;
+    if (!mounted) return; // guard State.context usage
+    if (!itemContext.mounted) return; // guard the captured BuildContext
 
     if (widget.isEditing) {
       // Editing from Home — pop back with the updated name.
-      Navigator.pop(context, _nameController.text.trim());
+      Navigator.pop(itemContext, _nameController.text.trim());
     } else {
       // First-time setup — clear the stack so setup can't be revisited via back.
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(itemContext, '/home', (route) => false);
     }
   }
 

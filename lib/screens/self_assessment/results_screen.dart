@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../models/screening_model.dart';
 import '../../services/self_assessment_analysis_service.dart';
+import '../../services/translation_service.dart';
+import '../../config/api_config.dart';
 
 // ── Colour tokens ─────────────────────────────────────────────────────────────
 const kBackground = Color(0xFFF5F3EE);
@@ -92,12 +94,42 @@ class SelfAssessmentResultsScreen extends StatefulWidget {
 class _SelfAssessmentResultsScreenState
     extends State<SelfAssessmentResultsScreen> {
   late bool _isUrdu; // 3. Changed to a 'late' variable
+  String? _summaryUr;
+  List<String>? _keyPointsUr;
 
   @override
   void initState() {
     super.initState();
     _isUrdu = widget
         .initialIsUrdu; // 4. Set the initial state from the widget parameter
+  }
+
+  Future<void> _toggleLanguage() async {
+    final newIsUrdu = !_isUrdu;
+    if (newIsUrdu && _summaryUr == null) {
+      try {
+        final texts = [widget.result.summary, ...widget.result.keyPoints];
+        final translations = await TranslationService.translateToUrdu(
+          apiKey: ApiConfig.anthropicApiKey,
+          texts: texts,
+        );
+        if (translations.isNotEmpty) {
+          setState(() {
+            _summaryUr = translations.first;
+            _keyPointsUr = translations.length > 1
+                ? translations.sublist(1)
+                : [];
+          });
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Translation failed: ${e.toString()}')),
+          );
+        }
+      }
+    }
+    setState(() => _isUrdu = newIsUrdu);
   }
 
   // ── Verdict helpers context match variants ─────────────────────────────────
@@ -174,7 +206,7 @@ class _SelfAssessmentResultsScreenState
               icon: _verdictIcon,
               description: _verdictDescription,
               isUrdu: _isUrdu,
-              onLangToggle: () => setState(() => _isUrdu = !_isUrdu),
+              onLangToggle: _toggleLanguage,
               onBack: () => Navigator.pop(context),
             ),
 
@@ -203,17 +235,20 @@ class _SelfAssessmentResultsScreenState
                       ),
                       child: Builder(
                         builder: (context) {
-                          // Detects whether the dynamically generated string is English or Urdu
+                          // Use cached translation when available (falls back to original)
+                          final displayedSummary = _isUrdu
+                              ? (_summaryUr ?? widget.result.summary)
+                              : widget.result.summary;
                           final isTextEnglish = RegExp(
                             r'[a-zA-Z]',
-                          ).hasMatch(widget.result.summary);
+                          ).hasMatch(displayedSummary);
 
                           return Directionality(
                             textDirection: isTextEnglish
                                 ? TextDirection.ltr
                                 : TextDirection.rtl,
                             child: Text(
-                              widget.result.summary,
+                              displayedSummary,
                               textAlign: isTextEnglish
                                   ? TextAlign.left
                                   : TextAlign.right,
@@ -246,17 +281,21 @@ class _SelfAssessmentResultsScreenState
                       isUrdu: _isUrdu,
                     ),
                     const SizedBox(height: 10),
-                    ...widget.result.keyPoints.map(
-                      (point) => _KeyPointRow(
-                        text: point,
-                        isUrdu: _isUrdu,
-                        textStyle: _getTextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: kTextBody,
+                    // Use translated key points when available
+                    ...((_isUrdu && _keyPointsUr != null)
+                            ? _keyPointsUr!
+                            : widget.result.keyPoints)
+                        .map(
+                          (point) => _KeyPointRow(
+                            text: point,
+                            isUrdu: _isUrdu,
+                            textStyle: _getTextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: kTextBody,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
 
                     const SizedBox(height: 24),
 
@@ -362,7 +401,7 @@ class _FullBleedVerdictCard extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
+                    color: Colors.white.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: RotatedBox(
@@ -379,7 +418,7 @@ class _FullBleedVerdictCard extends StatelessWidget {
               TextButton(
                 onPressed: onLangToggle,
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.white.withOpacity(0.15),
+                  backgroundColor: Colors.white.withValues(alpha: 0.15),
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 14,
@@ -407,7 +446,7 @@ class _FullBleedVerdictCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.18),
+              color: Colors.white.withValues(alpha: 0.18),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -454,7 +493,7 @@ class _FullBleedVerdictCard extends StatelessWidget {
           const SizedBox(height: 16),
 
           // ── Divider ───────────────────────────────────────────────────
-          Container(height: 1, color: Colors.white.withOpacity(0.2)),
+          Container(height: 1, color: Colors.white.withValues(alpha: 0.2)),
 
           const SizedBox(height: 16),
 
@@ -471,7 +510,7 @@ class _FullBleedVerdictCard extends StatelessWidget {
                 : GoogleFonts.inter(
                     fontSize: 14,
                     height: 1.6,
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                   ),
           ),
         ],

@@ -356,7 +356,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
                 child: ListView.separated(
                   padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
                   itemCount: _slots.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  separatorBuilder: (_, _) => const SizedBox(height: 12),
                   itemBuilder: (context, i) {
                     final slot = _slots[i];
                     final file = _files[slot.key];

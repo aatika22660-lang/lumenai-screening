@@ -1,4 +1,4 @@
-package com.example.oc_screening_app
+package com.aatika.lumenai
 
 import io.flutter.embedding.android.FlutterActivity
 

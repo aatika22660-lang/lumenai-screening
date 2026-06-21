@@ -234,7 +234,7 @@ class _PatientHistoryScreenState extends State<PatientHistoryScreen> {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: kBorder.withOpacity(0.5),
+              color: kBorder.withValues(alpha: 0.5),
               shape: BoxShape.circle,
             ),
             child: Icon(Icons.folder_open_rounded, size: 28, color: kTextMuted),
@@ -253,7 +253,7 @@ class _PatientHistoryScreenState extends State<PatientHistoryScreen> {
             'Completed screenings will appear here.',
             style: GoogleFonts.inter(
               fontSize: 13,
-              color: kTextMuted.withOpacity(0.7),
+              color: kTextMuted.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -265,7 +265,7 @@ class _PatientHistoryScreenState extends State<PatientHistoryScreen> {
     return ListView.separated(
       padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
       itemCount: _filtered.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 10),
+      separatorBuilder: (_, _) => const SizedBox(height: 10),
       itemBuilder: (context, i) {
         final s = _filtered[i];
         final color = _verdictColor(s.verdict);
@@ -338,12 +338,15 @@ class _PatientHistoryScreenState extends State<PatientHistoryScreen> {
           },
           child: GestureDetector(
             onTap: () async {
+              final itemContext = context;
               final patient = await DatabaseHelper.instance.getPatient(
                 s.patientId,
               );
-              if (patient == null || !mounted) return;
+              if (patient == null) return;
+              if (!mounted) return; // guard State.context usage
+              if (!itemContext.mounted) return; // guard the local BuildContext
               Navigator.pushNamed(
-                context,
+                itemContext,
                 '/results',
                 arguments: {
                   'patient': patient,

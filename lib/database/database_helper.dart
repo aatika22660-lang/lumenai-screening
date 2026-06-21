@@ -54,20 +54,19 @@ class DatabaseHelper {
 
     await db.execute('''
       CREATE TABLE screenings (
-        id                 TEXT PRIMARY KEY,
-        patient_id         TEXT NOT NULL,
-        location           TEXT NOT NULL,
-        screened_at        TEXT NOT NULL,
-        images             TEXT NOT NULL,
-        verdict            TEXT NOT NULL,
-        findings           TEXT NOT NULL,
-        summary            TEXT NOT NULL DEFAULT '',
-        key_points         TEXT NOT NULL DEFAULT '[]',
-        symmetry_analysis  TEXT,
-        FOREIGN KEY (patient_id) REFERENCES patients (id)
-        UNIQUE(patient_id, screened_at)  -- or whatever makes a record unique
-
-      )
+  id                 TEXT PRIMARY KEY,
+  patient_id         TEXT NOT NULL,
+  location           TEXT NOT NULL,
+  screened_at        TEXT NOT NULL,
+  images             TEXT NOT NULL,
+  verdict            TEXT NOT NULL,
+  findings           TEXT NOT NULL,
+  summary            TEXT NOT NULL DEFAULT '',
+  key_points         TEXT NOT NULL DEFAULT '[]',
+  symmetry_analysis  TEXT,
+  FOREIGN KEY (patient_id) REFERENCES patients (id),
+  UNIQUE(patient_id, screened_at)
+)
     ''');
   }
 

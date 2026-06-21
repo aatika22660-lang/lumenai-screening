@@ -242,9 +242,9 @@ Never output anything outside the JSON object.
   }
 
   static String _buildHistoryContext(List<Screening> history) {
-    if (history.isEmpty)
+    if (history.isEmpty) {
       return 'No previous screenings for this patient at this location.';
-
+    }
     final buffer = StringBuffer();
     buffer.writeln('Previous screenings for this patient at this location:');
     for (final s in history) {

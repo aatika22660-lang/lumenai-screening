@@ -1,6 +1,18 @@
 import 'dart:convert';
 import 'dart:io'; // Added to allow the use of standard File types for picked images
 
+// Utility to parse boolean-ish values from DB or JSON (int, bool, or string)
+bool _parseBool(dynamic v) {
+  if (v == null) return false;
+  if (v is bool) return v;
+  if (v is int) return v == 1;
+  if (v is String) {
+    final s = v.toLowerCase();
+    return s == '1' || s == 'true' || s == 't' || s == 'yes';
+  }
+  return false;
+}
+
 enum ScreeningVerdict { normal, suspicious, highRisk }
 
 // ── ScreeningImage ────────────────────────────────────────────────────────────
@@ -74,7 +86,7 @@ class ScreeningFinding {
     return ScreeningFinding(
       area: map['area'] as String,
       finding: map['finding'] as String,
-      flagged: map['flagged'] as bool,
+      flagged: _parseBool(map['flagged']),
       imageLabel: map['image_label'] as String?,
       bbox: map['bbox'] != null
           ? BoundingBox.fromMap(
@@ -102,7 +114,7 @@ class SymmetryAnalysis {
 
   factory SymmetryAnalysis.fromMap(Map<String, dynamic> map) {
     return SymmetryAnalysis(
-      isSymmetrical: map['is_symmetrical'] as bool,
+      isSymmetrical: _parseBool(map['is_symmetrical']),
       observation: map['observation'] as String,
     );
   }
@@ -176,9 +188,14 @@ class Screening {
       images: (jsonDecode(map['images'] as String) as List)
           .map((i) => ScreeningImage.fromMap(Map<String, dynamic>.from(i)))
           .toList(),
-      verdict: ScreeningVerdict.values.firstWhere(
-        (v) => v.name == map['verdict'],
-      ),
+      verdict: (() {
+        final v = map['verdict']?.toString();
+        if (v == null) return ScreeningVerdict.normal;
+        return ScreeningVerdict.values.firstWhere(
+          (e) => e.name == v,
+          orElse: () => ScreeningVerdict.normal,
+        );
+      })(),
       findings: (jsonDecode(map['findings'] as String) as List)
           .map((f) => ScreeningFinding.fromMap(Map<String, dynamic>.from(f)))
           .toList(),
