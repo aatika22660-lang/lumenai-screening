@@ -17,7 +17,7 @@ The clinical foundation is autofluorescence. Healthy oral mucosa absorbs 405nm b
 
 Pakistan has one of the highest rates of oral cancer in the world. In Karachi's industrial areas, the majority of male workers use smokeless tobacco daily; Gutka, Paan, Naswar. These substances are held in the gingivobuccal sulcus for extended periods, delivering carcinogens directly to the mucosal lining. The anatomical sites most affected, lateral borders of the tongue, floor of mouth, buccal mucosa, are the exact sites our app targets.
 
-The gap in survival rates tells the real story: catch oral cancer early and over 80% of patients survive. Catch it late and that number falls below 30%. But this isn't a failure of treatment — it's a failure of reach. The people most at risk simply don't show up in oncology clinics. They only seek formal care once symptoms become impossible to ignore, and by then, it's often too late.
+The gap in survival rates tells the real story: catch oral cancer early and over 80% of patients survive. Catch it late and that number falls below 30%. But this isn't a failure of treatment; it's a failure of reach. The people most at risk simply don't show up in oncology clinics. They only seek formal care once symptoms become impossible to ignore, and by then, it's often too late.
 
 This tool attacks this gap directly.
 
