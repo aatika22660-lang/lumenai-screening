@@ -1,7 +1,7 @@
 # OC Screening App — Full Project Report
 
 ---
-<img src="scanningresults.PNG" alt="CHW Mode: Scanning Results with Annotated Images" width="500">
+<img src="scanningresults.PNG" alt="CHW Mode: Scanning Results with Annotated Images" width="1000">
 
 ## What This Project Actually Is
 
