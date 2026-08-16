@@ -9,7 +9,7 @@ A smartphone-based oral cancer early detection system designed for deployment in
 
 The system has two components that work together: a Flutter Android application and a low-cost hardware attachment for fluorescence imaging. Together they form a triage tool that allows non-specialist users, either trained Community Health Workers or concerned individuals, to capture images of oral tissue, receive an AI-powered risk assessment, and act on it before a lesion becomes advanced.
 
-The clinical foundation is autofluorescence. Healthy oral mucosa absorbs 405nm blue-violet light and re-emits it as a pale green glow. Dysplastic or cancerous tissue loses this autofluorescence capacity and appears dark against the green background, a phenomenon called Fluorescence Visualisation Loss (FVL). This is the same principle used in professional devices like the VELscope, which costs thousands of dollars. Our prototype replicates the core imaging principle for under $50.
+The clinical foundation is autofluorescence. Healthy oral mucosa absorbs 405nm blue-violet light and re-emits it as a pale green glow. Dysplastic or cancerous tissue loses this autofluorescence capacity and appears dark against the green background, a phenomenon called Fluorescence Visualisation Loss (FVL). This is the same principle used in professional devices like the VELscope, which costs thousands of dollars. Our prototype replicates the core imaging principle for under PKR5000.
 
 ---
 
@@ -232,7 +232,7 @@ The self-assessment prompt is intentionally stripped down. No fluorescence termi
 | Lee Filter #15 / Rosco #19 gel sheet | Longpass filter — blocks reflected blue light, passes green fluorescence | PKR 1000 |
 | Disposable intraoral dental mirrors | Reflects hard-to-see areas inside the mouth | PKR1500 for pack |
 | Phone clamp with arm | Holds phone steady at consistent distance | PKR1000 |
-| Black craft foam | Light-blocking hood around camera to prevent ambient wash-out | $=PKR200-500 |
+| Black craft foam | Light-blocking hood around camera to prevent ambient wash-out | PKR200-500 |
 | Portable power bank | Keeps phone charged during field sessions | Already owned |
 | Tongue depressors | Tissue retraction | PKR500 |
 | Nitrile gloves | Infection control | PKR500 |
