@@ -1,10 +1,11 @@
 # OC Screening App — Full Project Report
 
 ---
+<img src="scanningresults.PNG" alt="CHW Mode: Scanning Results with Annotated Images" width="500">
 
 ## What This Project Actually Is
 
-We are building a smartphone-based oral cancer early detection system designed for deployment in Karachi's industrial communities; dockyards, transport hubs, roadside markets, where oral cancer rates are among the highest in the world and access to specialist care is effectively zero.
+A smartphone-based oral cancer early detection system designed for deployment in Karachi's industrial communities; dockyards, transport hubs, roadside markets, where oral cancer rates are among the highest in the world and access to specialist care is effectively zero.
 
 The system has two components that work together: a Flutter Android application and a low-cost hardware attachment for fluorescence imaging. Together they form a triage tool that allows non-specialist users, either trained Community Health Workers or concerned individuals, to capture images of oral tissue, receive an AI-powered risk assessment, and act on it before a lesion becomes advanced.
 
@@ -14,11 +15,11 @@ The clinical foundation is autofluorescence. Healthy oral mucosa absorbs 405nm b
 
 ## Why This Problem Matters
 
-Pakistan has one of the highest rates of oral cancer in the world. In Karachi's industrial areas, the majority of male workers use smokeless tobacco daily — Gutka, Paan, Naswar. These substances are held in the gingivobuccal sulcus for extended periods, delivering carcinogens directly to the mucosal lining. The anatomical sites most affected, lateral borders of the tongue, floor of mouth, buccal mucosa, are the exact sites our app targets.
+Pakistan has one of the highest rates of oral cancer in the world. In Karachi's industrial areas, the majority of male workers use smokeless tobacco daily; Gutka, Paan, Naswar. These substances are held in the gingivobuccal sulcus for extended periods, delivering carcinogens directly to the mucosal lining. The anatomical sites most affected, lateral borders of the tongue, floor of mouth, buccal mucosa, are the exact sites our app targets.
 
-The mortality gap is stark. Early-stage oral cancer has a survival rate above 80%. Late-stage drops below 30%. The reason outcomes are poor is not that treatment doesn't work — it is that screening doesn't reach the people who need it. These workers do not visit oncology units. They do not engage with formal healthcare unless symptoms are severe. By then it is often too late.
+The gap in survival rates tells the real story: catch oral cancer early and over 80% of patients survive. Catch it late and that number falls below 30%. But this isn't a failure of treatment — it's a failure of reach. The people most at risk simply don't show up in oncology clinics. They only seek formal care once symptoms become impossible to ignore, and by then, it's often too late.
 
-Our tool attacks this gap directly.
+This tool attacks this gap directly.
 
 ---
 
@@ -205,7 +206,7 @@ This mode is for individuals checking themselves privately. No CHW required, no 
 
 The system prompt sent to Claude for CHW mode is one of the most technically thoughtful parts of the project. It is not a generic "look at this mouth" instruction. It is a structured clinical brief that encodes real oral oncology knowledge:
 
-**Fluorescence interpretation rules:** The prompt teaches Claude what FVL looks like — dark, brown, or black patches against green — and critically, what to discount as artefact: shadows from folds, pooled saliva, dental restorations. This specificity is what separates a useful result from noise.
+**Fluorescence interpretation rules:** The prompt teaches Claude what FVL looks like: dark, brown, or black patches against green, and critically, what to discount as artefact: shadows from folds, pooled saliva, dental restorations. This specificity is what separates a useful result from noise.
 
 **Tobacco-specific risk stratification:** The prompt maps tobacco type to anatomical risk site. Gutka held in the gingivobuccal sulcus elevates risk at the buccal mucosa and floor of mouth. Naswar in the lower lip increases lower gingiva risk. This means a suspicious finding in a long-term Gutka user at the floor of mouth is flagged differently from the same finding in a non-tobacco user. The AI doesn't just look at the image — it integrates the patient profile.
 
@@ -227,75 +228,55 @@ The self-assessment prompt is intentionally stripped down. No fluorescence termi
 
 | Item | Purpose | Approximate Cost |
 |---|---|---|
-| 405nm LED flashlight | Excitation light source for autofluorescence | $10–15 |
-| Lee Filter #15 / Rosco #19 gel sheet | Longpass filter — blocks reflected blue light, passes green fluorescence | $5 |
-| Disposable intraoral dental mirrors | Reflects hard-to-see areas inside the mouth | $5–10 for pack |
-| Phone clamp with arm | Holds phone steady at consistent distance | $5–10 |
-| Black craft foam | Light-blocking hood around camera to prevent ambient wash-out | $3–5 |
+| 405nm LED flashlight | Excitation light source for autofluorescence | PKR1000-2000 |
+| Lee Filter #15 / Rosco #19 gel sheet | Longpass filter — blocks reflected blue light, passes green fluorescence | PKR 1000 |
+| Disposable intraoral dental mirrors | Reflects hard-to-see areas inside the mouth | PKR1500 for pack |
+| Phone clamp with arm | Holds phone steady at consistent distance | PKR1000 |
+| Black craft foam | Light-blocking hood around camera to prevent ambient wash-out | $=PKR200-500 |
 | Portable power bank | Keeps phone charged during field sessions | Already owned |
-| Tongue depressors | Tissue retraction | $2 |
-| Nitrile gloves | Infection control | $5 |
+| Tongue depressors | Tissue retraction | PKR500 |
+| Nitrile gloves | Infection control | PKR500 |
 
 **Total: Under $50**
 
 ### Physical Assembly
 
-The phone clamp holds the phone on an arm, camera pointing toward the patient's mouth. Black foam is cut into a sleeve that wraps around the camera end, creating a light-sealed tunnel. For white-light images the sleeve is the only modification — phone flash on, no filter. For fluorescence images, a small square of orange gel is placed over the camera lens inside the foam sleeve, the 405nm LED is switched on, and room lights are dimmed if possible.
+The phone clamp holds the phone on an arm, camera pointing toward the patient's mouth. Black foam is cut into a sleeve that wraps around the camera end, creating a light-sealed tunnel. For white-light images the sleeve is the only modification; phone flash on, no filter. For fluorescence images, a small square of orange gel is placed over the camera lens inside the foam sleeve, the 405nm LED is switched on, and room lights are dimmed if possible.
 
 The intraoral mirror is held inside the patient's mouth by the CHW and angled to reflect the target anatomical site back toward the phone camera. The tongue depressor is used in the other hand to retract tissue and clear the view.
 
 ### The Optical Logic
 
-The 405nm light excites oral mucosa. Healthy tissue re-emits green autofluorescence. The orange longpass filter cuts off wavelengths below ~530nm — meaning the reflected 405nm blue is blocked and only the green fluorescence passes through to the camera sensor. The result is an image where healthy tissue glows green and abnormal tissue appears dark. This is the same optical principle used in devices costing 100 times more.
+The 405nm light excites oral mucosa. Healthy tissue re-emits green autofluorescence. The orange longpass filter cuts off wavelengths below ~530nm; meaning the reflected 405nm blue is blocked and only the green fluorescence passes through to the camera sensor. The result is an image where healthy tissue glows green and abnormal tissue appears dark. This is the same optical principle used in devices costing 100 times more.
 
 ### Current Limitations
 
-This is a validation prototype. Mirror angle will vary between patients. Ambient light leakage through the foam hood is possible. Saliva on the mirror degrades image quality. These are real limitations that the polished clip-on device — with fixed geometry, integrated LEDs, and disposable optical tips — would address. For now the rig is enough to answer the core question: can a smartphone camera capture meaningful fluorescence differences between normal and abnormal oral tissue?
-
----
-
-## What Makes This Viable for Simvention 2026
-
-Simvention judges look for projects that combine technical depth with genuine real-world impact. This project makes a strong case on both dimensions.
-
-### Technical Originality
-
-Most student medical technology projects use a pre-trained model from a paper or a Kaggle dataset and wrap it in a basic interface. This project makes different choices at every level:
-
-The AI integration is not a trained classifier. It is a carefully engineered prompt that encodes real clinical knowledge — fluorescence physics, tobacco-specific oncology risk, anatomical site mapping, bilateral symmetry analysis — and uses a frontier vision model as the reasoning engine. The output is not a single confidence score. It is a structured clinical brief with per-image findings and normalised bounding box annotations.
-
-The dual-mode architecture recognises that screening tools serve two fundamentally different user relationships. CHW mode and self-assessment mode share a codebase but have entirely separate intake flows, capture flows, analysis services, and results presentations. This is a product design decision, not just a technical one.
-
-The fluorescence imaging pipeline — a $50 hardware rig replicating the optical principle of a $5,000 VELscope — is the kind of low-resource innovation that gets remembered at a competition.
+This is a validation prototype. Mirror angle will vary between patients. Ambient light leakage through the foam hood is possible. Saliva on the mirror degrades image quality. These are real limitations that the polished clip-on device, with fixed geometry, integrated LEDs, and disposable optical tips, would address. For now the rig is enough to answer the core question: can a smartphone camera capture meaningful fluorescence differences between normal and abnormal oral tissue?
 
 ### Real-World Grounding
 
-The project is not solving a hypothetical problem. Oral cancer is the fourth most common cancer in Pakistan. The population targeted — informal industrial workers in Lyari and Landhi — is genuinely underserved. The barriers to care — cost, distance, stigma, healthcare distrust — are real and documented.
+The project is not solving a hypothetical problem. Oral cancer is the fourth most common cancer in Pakistan. The population targeted, informal industrial workers in Lyari and Landhi, is genuinely underserved. The barriers to care, cost, distance, stigma, healthcare distrust, are real and documented.
 
 The CHW deployment model is modeled on how community health interventions actually work in Pakistan and similar contexts. The self-assessment mode exists because some people will never engage with a health worker but will quietly check themselves if given a non-judgmental tool on their own phone.
 
-The referral PDF is not a demo feature. It is the mechanism by which a positive screening result actually converts into a clinical encounter — a CHW hands a formatted document to a patient who takes it to a clinic. That chain of action is thought through.
+The referral PDF is not a demo feature. It is the mechanism by which a positive screening result actually converts into a clinical encounter - a CHW hands a formatted document to a patient who takes it to a clinic. That chain of action is thought through.
 
 ### Prototype Integrity
 
-The project is honest about what it is. Every screen carries "Prototype — Not for Clinical Use." The AI is a vision model, not a validated diagnostic algorithm. The hardware is a validation rig, not a polished medical device. This honesty is a strength, not a weakness. It demonstrates that we understand the difference between a proof of concept and a deployed product, which is exactly the maturity level Simvention rewards.
+The project is honest about what it is. Every screen carries "Prototype — Not for Clinical Use." The AI is a vision model, not a validated diagnostic algorithm. 
 
 ### The Progression Path
-
-A compelling submission tells judges not just what was built but where it goes. The roadmap is clear:
 
 - Phase 1 (current): Software prototype with Claude API, hardware validation rig under $50
 - Phase 2: Clinical pilot with CHWs in Karachi industrial areas, image dataset collection
 - Phase 3: Fine-tuned model trained on validated fluorescence images from this population, replacing the API with an on-device model for offline deployment
 - Phase 4: Polished clip-on hardware with fixed geometry, integrated LEDs, disposable optical tips — engineered for mass production at low cost
 
-Each phase builds on the last. The software architecture already anticipates this — the analysis service is modular, the prompt engineering is documented, the database schema supports longitudinal tracking for research use.
+Each phase builds on the last. The software architecture already anticipates this; the analysis service is modular, the prompt engineering is documented, the database schema supports longitudinal tracking for research use.
 
 ---
 
-## What We've Actually Built
-
-In the time since this project started we have:
+## What I've Actually Built
 
 - Designed and built a complete Flutter application with two fully separate user modes
 - Created a patient data model, screening data model, and SQLite database with proper migrations
@@ -304,7 +285,7 @@ In the time since this project started we have:
 - Implemented bounding box annotation overlays on result images
 - Generated professional referral PDFs on-device with patient data, AI findings, and images
 - Built a self-assessment mode with its own intake, capture, analysis service, and clinic lookup
-- Designed a hardware prototype for under $50 that replicates the optical principle of a $5,000 clinical device
+- Started Designing a hardware prototype for under PKR7000 that replicates the optical principle of a million rupee clinical device
 
 This is not a toy project. It is a coherent system built on real clinical reasoning, deployed for a real population, with a clear path from prototype to impact.
 
